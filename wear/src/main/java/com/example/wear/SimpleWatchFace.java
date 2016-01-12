@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.format.Time;
-import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -15,12 +17,12 @@ import android.util.Log;
 
 public class SimpleWatchFace {
 
-    private static final String TIME_FORMAT_WITHOUT_SECONDS = "%02d.%02d";
-    private static final String TIME_FORMAT_WITH_SECONDS = TIME_FORMAT_WITHOUT_SECONDS + ".%02d";
-    private static final String DATE_FORMAT = "%02d.%02d.%d";
+    private static final String TIME_FORMAT_WITHOUT_SECONDS = "%02d:%02d";
+    private static final String DATE_FORMAT = "%02d %02d %d";
 
     private final Paint timePaint;
     private final Paint datePaint;
+    private final Paint tempPaint;
     private final Time time;
 
     private boolean shouldShowSeconds = true;
@@ -32,32 +34,57 @@ public class SimpleWatchFace {
         timePaint.setAntiAlias(true);
 
         Paint datePaint = new Paint();
-        datePaint.setColor(Color.WHITE);
+        datePaint.setColor(Color.parseColor(SimpleWatchFaceUtil.DATE_TEXT_COLOR));
         datePaint.setTextSize(context.getResources().getDimension(R.dimen.date_size));
         datePaint.setAntiAlias(true);
 
-        return new SimpleWatchFace(timePaint, datePaint, new Time());
+        Paint tempPaint = new Paint();
+        tempPaint.setColor(Color.WHITE);
+        tempPaint.setTextSize(context.getResources().getDimension(R.dimen.temp_size));
+
+        return new SimpleWatchFace(timePaint, datePaint, tempPaint, new Time());
     }
 
-    SimpleWatchFace(Paint timePaint, Paint datePaint, Time time) {
+    SimpleWatchFace(Paint timePaint, Paint datePaint, Paint tempPaint, Time time) {
         this.timePaint = timePaint;
         this.datePaint = datePaint;
+        this.tempPaint = tempPaint;
         this.time = time;
     }
 
     public void draw(Canvas canvas, Rect bounds) {
         time.setToNow();
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.parseColor(SimpleWatchFaceUtil.BACKGROUND_COLOR));
 
-        String timeText = String.format(shouldShowSeconds ? TIME_FORMAT_WITH_SECONDS : TIME_FORMAT_WITHOUT_SECONDS, time.hour, time.minute, time.second);
+        String timeText = String.format(TIME_FORMAT_WITHOUT_SECONDS, time.hour, time.minute);
         float timeXOffset = computeXOffset(timeText, timePaint, bounds);
         float timeYOffset = computeTimeYOffset(timeText, timePaint, bounds);
         canvas.drawText(timeText, timeXOffset, timeYOffset, timePaint);
 
-        String dateText = String.format(DATE_FORMAT, time.monthDay, (time.month + 1), time.year);
+
+        String myDate = String.format(DATE_FORMAT, (time.month + 1), time.monthDay, time.year);
+        String dateText = convertDate(myDate);
         float dateXOffset = computeXOffset(dateText, datePaint, bounds);
         float dateYOffset = computeDateYOffset(dateText, datePaint);
         canvas.drawText(dateText, dateXOffset, timeYOffset + dateYOffset, datePaint);
+
+        String tempText = "21"+ (char) 0x00B0 + "16"+ (char) 0x00B0  ;
+        float tempXOffset = computeXOffset(tempText, tempPaint, bounds);
+        float tempYOffset = computeTempYOffset(tempText,tempPaint);
+        canvas.drawText(tempText,tempXOffset,timeYOffset + dateYOffset + tempYOffset,tempPaint);
+
+    }
+
+    private String convertDate(String date) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("MM dd yyyy");
+            Date d = format.parse(date);
+            SimpleDateFormat serverFormat = new SimpleDateFormat("EEE, MMM dd yyyy");
+            return serverFormat.format(d).toUpperCase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     private float computeXOffset(String text, Paint paint, Rect watchBounds) {
@@ -71,15 +98,19 @@ public class SimpleWatchFace {
         Rect textBounds = new Rect();
         timePaint.getTextBounds(timeText, 0, timeText.length(), textBounds);
         int textHeight = textBounds.height();
-        Log.i("TimeYoffset", "" + centerY);
         return centerY + (textHeight / 2.0f)-70.0f;
     }
 
     private float computeDateYOffset(String dateText, Paint datePaint) {
         Rect textBounds = new Rect();
         datePaint.getTextBounds(dateText, 0, dateText.length(), textBounds);
-        Log.i("TimeXoffset", "" + textBounds.height());
-        return textBounds.height() + 10.0f;
+        return textBounds.height() + 20.0f;
+    }
+
+    private float computeTempYOffset(String tempText, Paint tempPaint) {
+        Rect textBounds = new Rect();
+        tempPaint.getTextBounds(tempText, 0, tempText.length(), textBounds);
+        return textBounds.height() + 40.0f;
     }
 
     public void setAntiAlias(boolean antiAlias) {
@@ -90,6 +121,7 @@ public class SimpleWatchFace {
     public void setColor(int color) {
         timePaint.setColor(color);
         datePaint.setColor(color);
+
     }
 
     public void setShowSeconds(boolean showSeconds) {

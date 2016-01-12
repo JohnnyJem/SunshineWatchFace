@@ -78,7 +78,6 @@ import java.util.concurrent.TimeUnit;
             @Override
             public void run() {
                 onSecondTick();
-
                 if (isVisible() && !isInAmbientMode()) {
                     timeTick.postDelayed(this, TICK_PERIOD_MILLIS);
                 }
@@ -107,11 +106,9 @@ import java.util.concurrent.TimeUnit;
             super.onAmbientModeChanged(inAmbientMode);
 
             watchFace.setAntiAlias(!inAmbientMode);
-            watchFace.setColor(inAmbientMode ? Color.GRAY : Color.WHITE);
+            watchFace.setColor(inAmbientMode ? Color.GRAY : Color.parseColor(SimpleWatchFaceUtil.DATE_TEXT_COLOR));
             watchFace.setShowSeconds(!isInAmbientMode());
             invalidate();
-
-
             startTimerIfNecessary();
         }
 

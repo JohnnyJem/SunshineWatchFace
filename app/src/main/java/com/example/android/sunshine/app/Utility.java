@@ -16,13 +16,16 @@
 package com.example.android.sunshine.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
+import android.util.Log;
 
 import com.example.android.sunshine.app.sync.SunshineSyncAdapter;
+import com.example.android.sunshine.app.sync.WearService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,6 +33,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Utility {
+    private static final String TAG = "Utility";
+
     // We'll default our latlong to 0. Yay, "Earth!"
     public static float DEFAULT_LATLONG = 0F;
 
@@ -599,4 +604,19 @@ public class Utility {
         spe.putInt(c.getString(R.string.pref_location_status_key), SunshineSyncAdapter.LOCATION_STATUS_UNKNOWN);
         spe.apply();
     }
+
+
+    /**
+     * Calls upon WearService via intent to update the wear watchface weather and temperature status
+     * @param context Context used to get the intent.
+     */
+    static public void updateWearInfo(Context context){
+        Log.d(TAG, "updateWearInfo:");
+        Intent  intent = new Intent(context, WearService.class);
+        intent.setAction(WearService.UPDATE_WEAR);
+        context.startService(intent);
+    }
+
+
+
 }

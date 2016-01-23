@@ -52,7 +52,7 @@ public class SimpleWatchFace {
         this.time = time;
     }
 
-    public void draw(Canvas canvas, Rect bounds) {
+    public void draw(Canvas canvas, Rect bounds, String maxTemp, String minTemp) {
         time.setToNow();
         canvas.drawColor(Color.parseColor(SimpleWatchFaceUtil.BACKGROUND_COLOR));
 
@@ -68,12 +68,15 @@ public class SimpleWatchFace {
         float dateYOffset = computeDateYOffset(dateText, datePaint);
         canvas.drawText(dateText, dateXOffset, timeYOffset + dateYOffset, datePaint);
 
-        String tempText = "21"+ (char) 0x00B0 + "16"+ (char) 0x00B0  ;
-        float tempXOffset = computeXOffset(tempText, tempPaint, bounds);
-        float tempYOffset = computeTempYOffset(tempText,tempPaint);
-        canvas.drawText(tempText,tempXOffset,timeYOffset + dateYOffset + tempYOffset,tempPaint);
-
+        if (maxTemp!=null && minTemp !=null) {
+            String tempText = maxTemp + (char) 0x00B0 + minTemp + (char) 0x00B0;
+            float tempXOffset = computeXOffset(tempText, tempPaint, bounds);
+            float tempYOffset = computeTempYOffset(tempText, tempPaint);
+            canvas.drawText(tempText, tempXOffset, timeYOffset + dateYOffset + tempYOffset, tempPaint);
+        }
     }
+
+
 
     private String convertDate(String date) {
         try {
@@ -127,4 +130,6 @@ public class SimpleWatchFace {
     public void setShowSeconds(boolean showSeconds) {
         shouldShowSeconds = showSeconds;
     }
+
+
 }

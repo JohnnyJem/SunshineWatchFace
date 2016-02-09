@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.example.wear"
+<manifest package="com.example.android.sunshine.app"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature android:name="android.hardware.type.watch"/>
+
     <uses-permission android:name="com.google.android.permission.PROVIDE_BACKGROUND"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 

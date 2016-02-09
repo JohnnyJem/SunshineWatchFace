@@ -16,16 +16,13 @@
 package com.example.android.sunshine.app;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
-import android.util.Log;
 
 import com.example.android.sunshine.app.sync.SunshineSyncAdapter;
-import com.example.android.sunshine.app.sync.WearService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -605,17 +602,6 @@ public class Utility {
         spe.apply();
     }
 
-
-    /**
-     * Calls upon WearService via intent to update the wear watchface weather and temperature status
-     * @param context Context used to get the intent.
-     */
-    static public void updateWearInfo(Context context){
-        Log.d(TAG, "updateWearInfo:");
-        Intent  intent = new Intent(context, WearService.class);
-        intent.setAction(WearService.UPDATE_WEAR);
-        context.startService(intent);
-    }
 
 
 

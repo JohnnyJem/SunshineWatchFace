@@ -56,7 +56,7 @@ import java.util.TimeZone;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-
+//
 public class SimpleWatchFaceService extends CanvasWatchFaceService {
     private static String TAG = SimpleWatchFaceService.class.getSimpleName();
 

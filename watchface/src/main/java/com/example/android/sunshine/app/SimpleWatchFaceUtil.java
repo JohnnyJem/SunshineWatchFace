@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 
 public final class SimpleWatchFaceUtil {
+
     //The following methods are adapted from our mobile "app" module's Utility.class
 
     public static String getAmPmString(Resources resources, int amPm) {

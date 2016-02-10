@@ -56,10 +56,7 @@ import java.util.TimeZone;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Digital watch face with seconds. In ambient mode, the seconds aren't displayed. On devices with
- * low-bit ambient mode, the text is drawn without anti-aliasing in ambient mode.
- */
+
 public class SimpleWatchFaceService extends CanvasWatchFaceService {
     private static String TAG = SimpleWatchFaceService.class.getSimpleName();
 

@@ -1,6 +1,6 @@
 #SunshineWatchFace
-Project 6 - Android Nanodegree
-This app is used in the Udacity Advanced Android Assignment **Go Ubiquitous**.
+Project 6 - Android Nanodegree - **Go Ubiquitous**
+
 It uses [the final branch of Sunshine from Advanced Android App Development](https://github.com/udacity/Advanced_Android_Development/tree/7.05_Pretty_Wallpaper_Time "the final branch of Sunshine from Advanced Android App Development") 
 
 The app synchronizes weather information from OpenWeatherMap on Android Phones and Tablets.
@@ -8,11 +8,12 @@ The app synchronizes weather information from OpenWeatherMap on Android Phones a
 For this assignment I built a wearable watch face for Sunshine to run on an Android Wear device. 
 
 I learned the fundamentals of Android Wear and took into account design for multiple watch form factors.
-Implemented communicate between a mobile device and the wearable device was via Google API's Wearable API to send and synch data.
+I also implemented communicate between a mobile device and the wearable device using Google API's Wearable API to send and sync data.
 
 Getting Started
 ---------------
 Set your OpenWeather API key in your gradle.properties.
+You can get an API key at http://openweathermap.org/api
 
 This sample uses the Gradle build system.  To build this project, use the
 "gradlew build" command or use "Import Project" in Android Studio.

@@ -3,7 +3,7 @@ Project 6 - Android Nanodegree - **Go Ubiquitous**
 
 It uses [the final branch of Sunshine from Advanced Android App Development](https://github.com/udacity/Advanced_Android_Development/tree/7.05_Pretty_Wallpaper_Time "the final branch of Sunshine from Advanced Android App Development") 
 
-The app synchronizes weather information from OpenWeatherMap on Android Phones and Tablets.
+The initial final branch synchronized weather information from OpenWeatherMap on Android Phones and Tablets.
 
 For this assignment I built a wearable watch face for Sunshine to run on an Android Wear device. 
 

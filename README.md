@@ -1,35 +1,21 @@
-Advanced Android Sample App
-===================================
+#SunshineWatchFace
+Project 6 - Android Nanodegree
+This app is used in the Udacity Advanced Android Assignment **Go Ubiquitous**.
+It uses [the final branch of Sunshine from Advanced Android App Development](https://github.com/udacity/Advanced_Android_Development/tree/7.05_Pretty_Wallpaper_Time "the final branch of Sunshine from Advanced Android App Development") 
 
-Synchronizes weather information from OpenWeatherMap on Android Phones and Tablets. Used in the Udacity Advanced Android course.
+The app synchronizes weather information from OpenWeatherMap on Android Phones and Tablets.
 
-Pre-requisites
---------------
-Android SDK 21 or Higher
-Build Tools version 21.1.2
-Android Support AppCompat 22.2.0
-Android Support Annotations 22.2.0
-Android Support GridLayout 22.2.0
-Android Support CardView 22.2.0
-Android Support Design 22.2.0
-Android Support RecyclerView 22.2.0
-Google Play Services GCM 7.0.0
-BumpTech Glide 3.5.2
+For this assignment I built a wearable watch face for Sunshine to run on an Android Wear device. 
 
+I learned the fundamentals of Android Wear and took into account design for multiple watch form factors.
+Implemented communicate between a mobile device and the wearable device was via Google API's Wearable API to send and synch data.
 
 Getting Started
 ---------------
+Set your OpenWeather API key in your gradle.properties.
+
 This sample uses the Gradle build system.  To build this project, use the
 "gradlew build" command or use "Import Project" in Android Studio.
-
-Support
--------
-
-- Google+ Community: https://plus.google.com/communities/105153134372062985968
-- Stack Overflow: http://stackoverflow.com/questions/tagged/android
-
-Patches are encouraged, and may be submitted by forking this project and
-submitting a pull request through GitHub. Please see CONTRIBUTING.md for more details.
 
 License
 -------
